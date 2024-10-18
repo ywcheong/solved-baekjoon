@@ -5,12 +5,19 @@ Youngwoon Cheong (yw.ch@kaist.ac.kr)
 
 ## 6장 무식하게 풀기
 ### 6.2 재귀 호출과 완전 탐색
-* 쉬움
-    * ???
-* 보통
-    * ???
-* 어려움
-    * ???
+#### 백트래킹
+```py
+def backtrack(state) -> None:
+    if is_solution(state):
+        do_something_with_solution(state)
+        return
+    
+    for choice in get_choices(state):
+        if is_valid(state, choice):
+            state.add(choice)
+            backtrack(state)
+            state.remove(choice)
+```
 
 ### 6.7 최적화 문제
 * 쉬움
