@@ -28,12 +28,30 @@ def backtrack(state) -> None:
     * ???
 
 ### 6.10 많이 등장하는 완전 탐색 유형
-* 쉬움
-    * ???
-* 보통
-    * ???
-* 어려움
-    * ???
+이분 탐색
+```
+lower_bound(L, k) = i
+	<-> L[i-1] < k <= L[i]
+
+[1, 2, ..., k-1, k+1]
+                 ^ index of LB
+
+[1, 2, ..., k-1, k, k+1]
+                 ^ index of LB
+
+"제가 계산한 인덱스 이상은 전부 >= k에요"
+
+upper_bound(L, k) = i
+	<-> L[i-1] <= k < L[i]
+
+[1, 2, ..., k-1, k+1]
+            ^ index of UB
+
+[1, 2, ..., k-1, k, k+1]
+                 ^ index of UB
+
+"제가 계산한 인덱스 이하는 전부 <= k에요"
+```
 
 ## 7장 분할 정복
 * 쉬움
@@ -52,14 +70,20 @@ def backtrack(state) -> None:
     * ???
 
 ## 9장 동적 계획법 테크닉
-### 9.1 최적화 문제의 실제 답 계산하기
-### 9.6 K번째 답 계산하기
-### 9.11 정수 이외의 입력에 대한 메모이제이션
-### 9.16 조합 게임
-### 9.21 반복적 동적 계획법
-### 9.26 더 읽을 거리
 
 ## 10장 탐욕법
+```
+Well Ordering Principle
+
+Suppose Solution by Greedy as O*
+Suppose O* is not an optimal, but O- is.
+
+Let
+    O* = {i1, i2, ..., ik-1, ik, ik+1, ..., in}
+    O- = {i1, i2, ..., ik-1, i'k, i'k+1, ..., i'n}
+
+PROVE THAT O+ = O- - {i'k} + {ik} is optimal.
+```
 
 ## 11장 조합 탐색
 ### 11.2 조합 탐색 기법들
@@ -207,45 +231,94 @@ def backtrack(state) -> None:
 ### 27.4 그래프의 표현 방법
 
 ## 28장 그래프의 깊이 우선 탐색
-### 28.1 도입
-### 28.2 문제: 고대어 사전 (문제 ID: DICTIONARY, 난이도: 하)
-### 28.3 풀이: 고대어 사전
-### 28.4 오일러 서킷
-### 28.5 문제: 단어 제한 끝말잇기 (문제 ID: WORDCHAIN, 난이도: 하)
-### 28.6 풀이: 단어 제한 끝말잇기
-### 28.7 이론적 배경과 응용
-### 28.8 문제: 감시 카메라 설치 (문제 ID: GALLERY, 난이도: 중)
-### 28.9 풀이: 감시 카메라 설치
-### 28.10 문제: 회의실 배정 (문제 ID: MEETINGROOM, 난이도: 상)
-### 28.11 풀이: 회의실 배정
-
 ## 29장 그래프의 너비 우선 탐색
-### 29.1 도입
-### 29.2 문제: SORTING GAME (문제 ID: SORTGAME, 난이도: 중)
-### 29.3 풀이: SORTING GAME
-### 29.4 문제: 어린이날 (문제 ID: CHILDRENDAY, 난이도: 상)
-### 29.5 풀이: 어린이날
-### 29.6 최단 경로 전략
-### 29.7 문제: 하노이의 탑 (문제 ID: HANOI4B, 난이도: 중)
-### 29.8 풀이: 하노이의 탑
+```python
+# BFS, DFS (주의: 아래 코드는 Connected Graph에서만 작동)
+def get_distance(start):
+    to_visit, visited = \
+        [(0, start)], {start: 0}
+
+    while to_visit: # 여전히 노드가 남아 있다면...
+        dist, v = heapq.heappop(to_visit)
+        if dist > visited.get(v, float('inf')):
+            continue
+        for w, weight in edge(v):   # edge 함수로 구현하든, dict를 쓰든...
+            new_dist = visited[v] + weight
+            if w not in visited or new_dist < visited[w]:    # 방문한 적이 없거나 더 짧은 경로를 찾았다면
+                heapq.heappush(to_visit, (new_dist, w))
+                visited[w] = new_dist
+
+    return visited
+```
 
 ## 30장 최단 경로 알고리즘
-### 30.1 도입
-### 30.2 다익스트라의 최단 경로 알고리즘
-### 30.3 문제: 신호 라우팅 (문제 ID: ROUTING, 난이도: 하)
-### 30.4 풀이: 신호 라우팅
-### 30.5 문제: 소방차 (문제 ID: FIRETRUCKS, 난이도: 중)
-### 30.6 풀이: 소방차
-### 30.7 문제: 철인 N종 경기 (문제 ID: NTHLON, 난이도: 상)
-### 30.8 풀이: 철인 N종 경기
-### 30.9 벨만-포드의 최단 경로 알고리즘
-### 30.10 문제: 시간여행 (문제 ID: TIMETRIP, 난이도: 중)
-### 30.11 풀이: 시간여행
-### 30.12 플로이드의 모든 쌍 최단 거리 알고리즘
-### 30.13 문제: 음주 운전 단속 (문제 ID: DRUNKEN, 난이도: 중)
-### 30.14 풀이: 음주 운전 단속
-### 30.15 문제: 선거 공약 (문제 ID: PROMISES, 난이도: 중)
-### 30.16 풀이: 선거 공약
+최단경로 문제는 4가지로 나눌 수 있다.
+* **단일** 출발, **단일** 도착 `(p -> q)`
+    * 단일-전체의 하위문제
+* **단일** 출발, **전체** 도착 `(p -> B)`
+    * 음수 edge 부재 = 다익스트라
+    * 음수 edge 존재 = 벨만-포트
+* **전체** 출발, **단일** 도착 `(A -> q)`
+    * 그래프 방향을 반대로 뒤집으면 `단일출발 전체도착`과 동일한 경우이다.
+* **전체** 출발, **전체** 도착 `(A -> B)`
+
+### 30.2 다익스트라 알고리즘
+* **단일** 출발, **전체** 도착.
+* 음수 edge 존재 시 틀림
+* 암기: Dijkstra (D-efault)
+* $O(v^2 + e)$
+
+```python
+import heapq
+
+def edge(v):
+    return [('distance_1', 'node_1'), ('distance_2', 'node_2')]
+
+def get_shortest(start):
+    to_visit, visited = [(0, start)], {start: 0}
+
+    while to_visit:
+        dist, v = heapq.heappop(to_visit)
+        
+        # "만료된 노드 삭제" - 아래 참고
+        if dist > visited.get(v, float("inf")):
+            continue
+        assert dist == visited.get[v]
+
+        # 탐색 시작
+        for weight, w in edge(v):
+            new_dist = dist + weight
+            #  (미개척 노드거나)  or  (더 나은 개척로가 있거나)
+            if w not in visited or new_dist < visited[w]:
+                # heappush를 함으로써 기존 (old_dist, w)는 "만료된 노드 삭제"에서 걸러짐
+                # w not in visited 조건을 활용해, 더 좋은 해가 아닌 경우에는 heappush 안함
+                heapq.heappush(to_visit, (new_dist, w))
+                visited[w] = new_dist
+
+    return visited
+```
+
+### 30.9 벨만-포드 알고리즘
+* **단일** 출발, **전체** 도착 (= 다익스트라)
+* 음수 cycle 탐지 가능
+* 암기: Bellman-Ford (B-etter)
+* $O(ve) (\approx O(v^3))$
+
+```python
+def get_shortest(graph, start):
+    pass
+```
+
+### 30.12 플로이드-워셜 알고리즘
+* **전체** 출발, **전체** 도착
+* 음수 cycle 탐지 가능
+* 암기: Floyd-Warshall (F-ull)
+* $O(v^3)$
+
+```python
+def get_shortest(graph):
+    pass
+```
 
 ## 31장 최소 스패닝 트리
 ### 31.1 도입

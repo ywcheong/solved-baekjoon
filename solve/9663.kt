@@ -11,9 +11,9 @@
 
 import kotlin.system.measureTimeMillis
 
-var TESTCASE_ID = 1
+private var TESTCASE_ID = 1
 
-fun equal(left: Int, right: Int) {
+private fun equal(left: Int, right: Int) {
     if (left == right) {
         println("Testcase $TESTCASE_ID: OK ($left == $right)")
     } else {
@@ -22,7 +22,7 @@ fun equal(left: Int, right: Int) {
     TESTCASE_ID++
 }
 
-fun solveQueen(n: Int): Int {
+private fun solveQueen(n: Int): Int {
     var result = 0
 
     fun isValid(queens: IntArray, level: Int, column: Int): Boolean {
@@ -53,7 +53,7 @@ fun solveQueen(n: Int): Int {
     return result
 }
 
-fun test() {
+private fun test() {
     println("WARNING: TEST MODE")
 
     equal(solveQueen(1), 1)
@@ -71,7 +71,7 @@ fun test() {
     println("TEST DONE")
 }
 
-fun submit() {
+private fun submit() {
     val n = readLine()!!.toInt()
     println(solveQueen(n))
 }
