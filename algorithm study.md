@@ -316,8 +316,20 @@ def get_shortest(graph, start):
 * $O(v^3)$
 
 ```python
-def get_shortest(graph):
-    pass
+def get_shortest(node_count, edge):
+    '''edge: edge[i][j] = (i -> j dist) or None'''
+    dist = [[float("inf")] * node_count for _ in range(node_count)]
+    for start in range(node_count):
+        for end in range(node_count):
+            if edge[start][end] is not None:
+                # initialize dist with edge
+                dist[start][end] = min(dist[start][end], edge[start][end])
+    for mid in range(node_count):
+        for start in range(node_count):
+            for end in range(node_count):
+                # update each dist for every possible mids
+                dist[start][end] = min(dist[start][end], dist[start][mid] + dist[mid][end])
+    return dist
 ```
 
 ## 31장 최소 스패닝 트리
