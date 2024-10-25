@@ -266,7 +266,7 @@ def get_distance(start):
 * **단일** 출발, **전체** 도착.
 * 음수 edge 존재 시 틀림
 * 암기: Dijkstra (D-efault)
-* $O(v^2 + e)$
+* 시작 노드 1개에 대해 $O(E\log{V})$
 
 ```python
 import heapq
@@ -281,7 +281,7 @@ def get_shortest(start):
         dist, v = heapq.heappop(to_visit)
         
         # "만료된 노드 삭제" - 아래 참고
-        if dist > visited.get(v, float("inf")):
+        if dist > visited[v]:
             continue
         assert dist == visited.get[v]
 
@@ -302,18 +302,38 @@ def get_shortest(start):
 * **단일** 출발, **전체** 도착 (= 다익스트라)
 * 음수 cycle 탐지 가능
 * 암기: Bellman-Ford (B-etter)
-* $O(ve) (\approx O(v^3))$
+* 시작 노드 1개에 대해 $O(VE)$
 
 ```python
-def get_shortest(graph, start):
-    pass
+def get_shortest(node_count, edge, start):
+    dist = [float("inf")] * node_count
+    dist[start] = 0
+    
+    # 총 V번의 갱신 시도
+    for step in range(1, node_count + 1):
+        # 각 갱신마다 모든 edge 체크
+        for start, end, weight in edge:
+            # 개척 노드만 따지자...
+            if dist[start] != float("inf"):
+                continue 
+
+            # 만약 (더 나은 개척로가 있다면) -> 갱신
+            new_dist = dist[start] + weight
+            if dist[end] > new_dist:
+                dist[end] = new_dist
+
+                # V번째 갱신이 성공한 거면: 음수사이클 존재 (망했어요)
+                if step == node_count - 1:
+                    return None
+
+    return dist
 ```
 
 ### 30.12 플로이드-워셜 알고리즘
 * **전체** 출발, **전체** 도착
 * 음수 cycle 탐지 가능
 * 암기: Floyd-Warshall (F-ull)
-* $O(v^3)$
+* 시작 노드 $V$개에 대해 $O(V^3)$
 
 ```python
 def get_shortest(node_count, edge):

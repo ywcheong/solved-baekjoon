@@ -25,37 +25,51 @@ def equal(left, right):
 
 # Implementation
 """ write code here """
-from collections import deque, defaultdict
+sys.setrecursionlimit(100500)
 
-def get_adjacent_map(edge):
-    adjacent_map = defaultdict(list)
-    for start, end, weight in edge:
-        adjacent_map[start].append((weight, end))
-        adjacent_map[end].append((weight, start))
-    return adjacent_map
+def get_child_map(edge):
+    child_map = dict()
+    for parent, child, weight in edge:
+        if parent not in child_map:
+            child_map[parent] = [(weight, child)]
+        else:
+            child_map[parent].append((weight, child))
+    return child_map
 
-def get_farthest(edge, starting):
-    to_visit, visited = deque([starting]), {starting: 0}
-    max_dist, max_node = 0, starting
-
-    while to_visit:
-        v = to_visit.popleft()
-        for dist, w in edge[v]:
-            if w not in visited:
-                to_visit.append(w)
-                visited[w] = visited[v] + dist
-                if visited[w] > max_dist:
-                    max_dist, max_node = visited[w], w
-
-    return max_dist, max_node
 
 def solve_diameter(edge):
-    adjacent_map = get_adjacent_map(edge)
+    child_map = get_child_map(edge)
 
-    _, v = get_farthest(adjacent_map, 1)
-    result, _ = get_farthest(adjacent_map, v)
+    def solve(node):
+        this_depth, this_diameter = 0, 0
 
-    return result
+        if node not in child_map:
+            return this_depth, this_diameter
+        
+        child_depth_list, child_diameter_list = [], []
+        for child_weight, child_node in child_map[node]:
+            child_depth, child_diameter = solve(child_node)
+            child_depth_list.append(child_depth + child_weight)
+            child_diameter_list.append(child_diameter)
+        
+        this_depth = max(child_depth_list)
+        
+        if len(child_map[node]) == 1:
+            child_depth_list.sort()
+            diameter_containing_this = child_depth_list[-1]
+            child_diameter_list.append(diameter_containing_this)
+            this_diameter = max(child_diameter_list)
+        else:
+            child_depth_list.sort()
+            diameter_containing_this = child_depth_list[-1] + child_depth_list[-2]
+            child_diameter_list.append(diameter_containing_this)
+            this_diameter = max(child_diameter_list)
+    
+        return this_depth, this_diameter
+
+    root_depth, root_diameter = solve(1)
+    return root_diameter
+
 
 # Testing
 def test():
@@ -106,9 +120,6 @@ def test():
         ),
         33
     )
-
-    import cProfile
-    cProfile.run('solve_diameter([(v, v+1, v**2) for v in range(1, 99_999)])')
 
     print("TEST DONE")
 
