@@ -23,7 +23,11 @@ def equal(left, right):
 
 # Implementation
 """ write code here """
-
+def solve_zero(num):
+    pow_5 = num // 5
+    pow_25 = num // 25
+    pow_125 = num // 125
+    return pow_5 + pow_25 + pow_125
 
 # Testing
 def test():
@@ -32,6 +36,9 @@ def test():
     """ test here """
     # equal(1, 1) -> OK (1 == 1)
     # equal(2, 1) -> FAIL (2 == 1)
+    equal(solve_zero(10), 2)
+    equal(solve_zero(15), 3)
+    equal(solve_zero(3), 0)
 
     print("TEST DONE")
 
@@ -39,9 +46,10 @@ def test():
 # Submit
 def submit():
     """get input here"""
+    print(solve_zero(input_one(int)))
 
 
 # Case-switch
 if __name__ == "__main__":
-    test()
+    # test()
     submit()
