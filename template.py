@@ -7,7 +7,7 @@
 import sys
 
 input_one = lambda wanted_type: wanted_type(sys.stdin.readline().strip())
-input_list = lambda wanted_type: list(map(wanted_type, input().split()))
+input_list = lambda wanted_type: list(map(wanted_type, input_one(str).split()))
 
 TESTCASE_ID = 1
 

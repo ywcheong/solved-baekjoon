@@ -8,7 +8,7 @@ def input_one(given_type):
 
 
 def input_list(given_type):
-    return list(map(given_type, input().split()))
+    return list(map(given_type, input_one(str).split()))
 
 
 def main():
