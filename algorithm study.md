@@ -4,7 +4,6 @@ Youngwoon Cheong (yw.ch@kaist.ac.kr)
 # 3부 알고리즘 설계 패러다임
 
 ## 6장 무식하게 풀기
-### 6.2 재귀 호출과 완전 탐색
 #### 백트래킹
 ```py
 def backtrack(state) -> None:
@@ -54,22 +53,30 @@ upper_bound(L, k) = i
 ```
 
 ## 7장 분할 정복
-* 쉬움
-    * ???
-* 보통
-    * ???
-* 어려움
-    * ???
 
 ## 8장 동적 계획법
-* 쉬움
-    * ???
-* 보통
-    * ???
-* 어려움
-    * ???
+* Memoization
 
-## 9장 동적 계획법 테크닉
+재귀함수 펴기
+```python
+# Recursive
+def recursive_function(*args):
+    if some:
+        recursive_function(*newargs)
+
+recursive_function(*init_args)
+
+# Pseudo-recursive
+def pseudo_recursive():
+    def recursive(*args):
+        if some:
+            callstack.append(*newargs)
+
+    callstack = [(*init_args)]
+    while callstack:
+        
+        
+```
 
 ## 10장 탐욕법
 ```
@@ -140,10 +147,9 @@ PROVE THAT O+ = O- - {i'k} + {ik} is optimal.
 ### 16.6 더 읽을거리
 
 ## 17장 부분 합
-### 17.1 도입
-### 17.2 문제: 크리스마스 인형 (문제 ID: CHRISTMAS, 난이도: 중)
-### 17.3 풀이: 크리스마스 인형
-### 17.4 더 공부할 거리
+$$
+    S_n = \sum_{i=1}^{n}a_i
+$$
 
 ## 18장 선형 자료 구조
 ### 18.1 도입
@@ -155,13 +161,13 @@ PROVE THAT O+ = O- - {i'k} + {ik} is optimal.
 ### 18.7 더 읽을 거리
 
 ## 19장 큐와 스택, 데크
-### 19.1 도입
-### 19.2 큐와 스택, 데크의 구현
-### 19.3 스택과 큐의 활용
-### 19.4 문제: 짝이 맞지 않는 괄호 (문제 ID: BRACKETS2, 난이도: 하)
-### 19.5 풀이: 짝이 맞지 않는 괄호
-### 19.6 문제: 외계 신호 분석 (문제 ID: ITES, 난이도: 중)
-### 19.7 풀이: 외계 신호 분석
+```python
+from collections import deque
+deque.popleft
+deque.pop
+deque.appendleft
+deque.append
+```
 
 ## 20장 문자열
 ### 20.1 도입
@@ -356,10 +362,6 @@ def get_shortest(node_count, edge):
 ### 31.1 도입
 ### 31.2 크루스칼의 최소 스패닝 트리 알고리즘
 ### 31.3 프림의 최소 스패닝 트리 알고리즘
-### 31.4 문제: 근거리 네트워크 (문제 ID: LAN, 난이도: 하)
-### 31.5 풀이: 근거리 네트워크
-### 31.6 문제: 여행 경로 정하기 (문제 ID: TPATH, 난이도: 상)
-### 31.7 풀이: 여행 경로 정하기
 
 ## 32장 네트워크 유량
 ### 32.1 도입
