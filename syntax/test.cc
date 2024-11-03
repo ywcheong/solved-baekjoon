@@ -1,22 +1,15 @@
-#include <string>
 #include <iostream>
-#include <vector>
+#include <string>
 using namespace std;
 
-const char EOL = '\n';
+int main()
+{
+    int val1, val2;
+    string str;
+    cin >> val1;
+    cin >> val2;
+    cin.ignore();
+    getline(cin, str);
+    cout << val1 << val2 << str << endl;
 
-int main(){
-    int n;
-    cin >> n;
-
-    vector<string> L(n);
-    for(int i = 0; i < n; i++){
-        cin >> L[i];
-    }
-
-    cout << "answer" << EOL;
-
-    for(auto str : L){
-        cout << str << EOL;
-    }
 }

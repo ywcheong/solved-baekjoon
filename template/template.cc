@@ -1,12 +1,35 @@
-#include <iostream>
+// My Solution : https://github.com/ywcheong/solved-baekjoon
+
+#include <iostream>     // cin(getline), cout
+#include <iomanip>      // fixed, setprecision
+#include <string>       // string
+#include <sstream>      // stringstream.str()
+#include <vector>       // vector
+#include <algorithm>    // count, count_if, sort
+
+// Special Data Structures
+// #include <set>
+// #include <map>
+// #include <unordered_set>
+// #include <unordered_map>
+
+// Include Extra header here
+// #include <
+
 using namespace std;
+
+// Keystroke-saving hacking: do not use in real world
+typedef long long bigint;
+const char eol = '\n';
 
 int main()
 {
-    int list_length;
-    int a = 3;
-    cin >> list_length;
-    cout << list_length + a << endl;
+    // Desync stdio w/ iostream + Desync cin/cout
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // Write your code here
+    int something;
 
     return 0;
 }
