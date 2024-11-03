@@ -1,11 +1,11 @@
 # Algorithm Study
 Youngwoon Cheong (yw.ch@kaist.ac.kr)
 
-# 3부 알고리즘 설계 패러다임
-
-## 6장 무식하게 풀기
-#### 백트래킹
-```py
+## 알고리즘 설계 패러다임
+## 6장 완전 탐색
+### 백트래킹
+```python
+# Python
 def backtrack(state) -> None:
     if is_solution(state):
         do_something_with_solution(state)
@@ -18,38 +18,13 @@ def backtrack(state) -> None:
             state.remove(choice)
 ```
 
-### 6.7 최적화 문제
-* 쉬움
-    * ???
-* 보통
-    * ???
-* 어려움
-    * ???
-
-### 6.10 많이 등장하는 완전 탐색 유형
-이분 탐색
+### 이분 탐색
 ```
 lower_bound(L, k) = i
-	<-> L[i-1] < k <= L[i]
-
-[1, 2, ..., k-1, k+1]
-                 ^ index of LB
-
-[1, 2, ..., k-1, k, k+1]
-                 ^ index of LB
-
-"제가 계산한 인덱스 이상은 전부 >= k에요"
+cond(mid) = (k <= mid)
 
 upper_bound(L, k) = i
-	<-> L[i-1] <= k < L[i]
-
-[1, 2, ..., k-1, k+1]
-            ^ index of UB
-
-[1, 2, ..., k-1, k, k+1]
-                 ^ index of UB
-
-"제가 계산한 인덱스 이하는 전부 <= k에요"
+cond(mid) = (k < mid)
 ```
 
 ## 7장 분할 정복
@@ -57,40 +32,14 @@ upper_bound(L, k) = i
 ## 8장 동적 계획법
 * Memoization
 
-재귀함수 펴기
-```python
-# Recursive
-def recursive_function(*args):
-    if some:
-        recursive_function(*newargs)
-
-recursive_function(*init_args)
-
-# Pseudo-recursive
-def pseudo_recursive():
-    def recursive(*args):
-        if some:
-            callstack.append(*newargs)
-
-    callstack = [(*init_args)]
-    while callstack:
-        
-        
-```
-
 ## 10장 탐욕법
-```
-Well Ordering Principle
-
-Suppose Solution by Greedy as O*
-Suppose O* is not an optimal, but O- is.
-
-Let
-    O* = {i1, i2, ..., ik-1, ik, ik+1, ..., in}
-    O- = {i1, i2, ..., ik-1, i'k, i'k+1, ..., i'n}
-
-PROVE THAT O+ = O- - {i'k} + {ik} is optimal.
-```
+* Well Ordering Principle
+    * Suppose Solution by Greedy as $O^*$
+    * Suppose $O^*$ is not an optimal, but $O^-$ is.
+    * Let
+        * $O^* = \{i_1, i_2, ..., i_{k-1}, i_k, i_{k+1}, ..., i_n\}$
+        * $O^- = \{i_1, i_2, ..., i_{k-1}, i^{'}_{k}, i^{'}_{k+1}, ..., i^{'}_{n}\}$
+    * PROVE THAT $O^+ = O^- - \{i^{'}_{k}\} + \{i_k\}$ is optimal.
 
 ## 11장 조합 탐색
 ### 11.2 조합 탐색 기법들
@@ -162,6 +111,7 @@ $$
 
 ## 19장 큐와 스택, 데크
 ```python
+# Python
 from collections import deque
 deque.popleft
 deque.pop

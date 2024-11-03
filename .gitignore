@@ -4,6 +4,4 @@ run-container
 *.exe
 
 # Ignore all files without extensions in the /solve directory
-/solve/*
-!/solve/*/
-!/solve/*.*
+*/solve-cc.out
