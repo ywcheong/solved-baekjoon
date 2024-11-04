@@ -1,20 +1,28 @@
 // My Solution : https://github.com/ywcheong/solved-baekjoon
 
-#include <iostream>     // cin(getline), cout
-#include <iomanip>      // fixed, setprecision
-#include <string>       // string
-#include <sstream>      // stringstream.str()
-#include <vector>       // vector
-#include <algorithm>    // count, count_if, sort
+// Essential Headers
+#include <algorithm>  // count, count_if, sort, ...
+#include <iomanip>    // cin << fixed << setprecision
+#include <iostream>   // cin(ignore/getline), cout
+#include <sstream>    // stringstream.str()
+#include <string>     // string
+#include <vector>     // vector
 
-// Special Data Structures
-// #include <set>
-// #include <map>
-// #include <unordered_set>
-// #include <unordered_map>
+// // Common Data Structure
+// #include <forward_list>  // Single Linked List
+// #include <list>          // Double Linked List
+// #include <stack>         // Stack
+// #include <queue>         // Queue, Priority Queue
+// #include <deque>         // Deque
+
+// // Ready-to-use
+// // * multi~ (ex. unordered_multiset)
+// #include <set>           // Sorted BTree, element
+// #include <map>           // Sorted BTree, key-value
+// #include <unordered_set> // Hash Table, element
+// #include <unordered_map> // Hash Table, key-value
 
 // Include Extra header here
-// #include <
 
 using namespace std;
 
@@ -22,8 +30,7 @@ using namespace std;
 typedef long long bigint;
 const char eol = '\n';
 
-int main()
-{
+int main() {
     // Desync stdio w/ iostream + Desync cin/cout
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
