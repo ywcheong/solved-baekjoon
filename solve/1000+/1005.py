@@ -12,10 +12,6 @@ def input_list(given_type):
     return list(map(given_type, input_one(str).split()))
 
 
-FLOWIN = 1000000
-FLOWOUT = 2000000
-
-
 def get_shortest(start, edge):
     to_visit, visited = [(0, start)], {start: 0}
     farthest = 0
@@ -49,15 +45,14 @@ def main():
 
         rule_list: dict[int, list[tuple[int, int]]] = dict()
         for node in range(1, build_count + 1):
-            rule_list[node + FLOWIN] = [(-build_list[node - 1], node + FLOWOUT)]
-            rule_list[node + FLOWOUT] = []
+            rule_list[node] = []
 
         for _ in range(rule_count):
             start, end = input_list(int)
-            rule_list[end + FLOWOUT].append((0, start + FLOWIN))
+            rule_list[end].append((-build_list[start-1], start))
 
         target_building = input_one(int)
-        print(get_shortest(FLOWIN + target_building, rule_list))
+        print(get_shortest(target_building, rule_list) + build_list[target_building-1])
 
 
 main()
