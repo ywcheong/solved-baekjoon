@@ -1,11 +1,50 @@
-# Algorithm Study Summary Note
+# Python Algorithm Study Summary Note
 Youngwoon Cheong (yw.ch@kaist.ac.kr)
+
+## Table of Contents
+- [Python Algorithm Study Summary Note](#python-algorithm-study-summary-note)
+  - [Table of Contents](#table-of-contents)
+  - [Time Complexity Analysis](#time-complexity-analysis)
+    - [Asymptotic Notation of Time Complexity](#asymptotic-notation-of-time-complexity)
+    - [Master Theorem](#master-theorem)
+  - [Searching](#searching)
+    - [Backtracking](#backtracking)
+    - [Parametric Search](#parametric-search)
+    - [Binary Search](#binary-search)
+  - [Optimization](#optimization)
+    - [Dynamic Programming (TODO)](#dynamic-programming-todo)
+    - [Divide and Conquer (TODO)](#divide-and-conquer-todo)
+    - [Greedy (TODO)](#greedy-todo)
+  - [Data Structure (TODO)](#data-structure-todo)
+    - [Stack (TODO)](#stack-todo)
+    - [Queue (TODO)](#queue-todo)
+    - [Heap (TODO)](#heap-todo)
+    - [Linked List (TODO)](#linked-list-todo)
+    - [Balanced Tree (TODO)](#balanced-tree-todo)
+    - [Segment Tree (TODO)](#segment-tree-todo)
+    - [Bitmask (TODO)](#bitmask-todo)
+    - [String (TODO)](#string-todo)
+  - [Graph (TODO)](#graph-todo)
+    - [Search - BFS \& DFS](#search---bfs--dfs)
+    - [Shortest Path](#shortest-path)
+      - [Dijkstra (TODO)](#dijkstra-todo)
+      - [Bellman-Ford (TODO)](#bellman-ford-todo)
+      - [Floyd-Warshall (TODO)](#floyd-warshall-todo)
+    - [Min Spanning Tree (TODO)](#min-spanning-tree-todo)
+      - [Prim (TODO)](#prim-todo)
+      - [Kruskal (TODO)](#kruskal-todo)
+    - [Network Flow (TODO)](#network-flow-todo)
+      - [Ford-Fulkerson (TODO)](#ford-fulkerson-todo)
+      - [Bipartite Matching (TODO)](#bipartite-matching-todo)
+  - [Geometry (TODO)](#geometry-todo)
+  - [Numeric Analysis (TODO)](#numeric-analysis-todo)
+
 
 ## Time Complexity Analysis
 
 ### Asymptotic Notation of Time Complexity
 * Upper-strict-bound $o(f(n))$
-* Upper-equal-bound $O(f(n))$
+* **Upper-equal-bound** $O(f(n))$
 * Equal-bound $\Theta(f(n))$
 * Lower-equal-bound $\Omega(f(n))$
 * Lower-strict-bound $\omega(f(n))$
@@ -14,7 +53,7 @@ Youngwoon Cheong (yw.ch@kaist.ac.kr)
 Let $T(n)$ the time complexity function s.t.
 
 $$
-    T(n) = a T(n/b) + f(n)
+    T(n) = a T(\frac{n}{b}) + f(n)
 $$
 
 Then, naïvely,
@@ -23,36 +62,16 @@ $$
 T(n) \in
 
 \begin{cases}
-\Theta(n^{\log_b a}) & : f(n) = o(n^{\log_b a}) \\
-\Theta(n^{\log_b a} \log n) & : f(n) = \Theta(n^{\log_b a}) \\
-\Theta(f(n)) & : f(n) = \omega(n^{\log_b a}) \\
+\Theta(n^{\log_b a}) & : f(n) \in o(n^{\log_b a}) \\
+\Theta(n^{\log_b a} \log n) & : f(n) \in \Theta(n^{\log_b a}) \\
+\Theta(f(n)) & : f(n) \in \omega(n^{\log_b a}) \\
 \end{cases}
 $$
 
 ## Searching
 ### Backtracking
-#### Use Cases
 * Small search space
 * Require traversing every cases
-
-#### Example Code
-```c++
-// Backtracking - C++
-void backtrack(State& state) {
-    if (is_solution(state)) {
-        do_something_with_solution(state);
-        return;
-    }
-
-    for (auto& choice : get_choices(state)) {
-        if (is_valid(state, choice)) {
-            state.add(choice);
-            backtrack(state);
-            state.remove(choice);
-        }
-    }
-}
-```
 
 ```python
 # Backtracking - Python
@@ -69,11 +88,11 @@ def backtrack(state) -> None:
 ```
 
 ### Parametric Search
-#### Use Cases
+
 * Search space is sorted or total-ordered
 * Can implement `cond` function
 
-#### Example Code
+
 ```python
 # Parametric Search - Python
 def parametric_search(lo, hi, cond):
@@ -92,256 +111,140 @@ def parametric_search(lo, hi, cond):
   * You can use `lo, hi = -1, len(L)` then you get `lo, hi = 2, 3`
 
 ### Binary Search
-#### Use Cases
+
 * This is a special case of the [Parametric Search](#parametric-search).
   * Given nondecreasing list `L`, you want to find `x`.
   * Let `lo, hi = -1, len(L)`, `cond = (mid) => (x <= L[mid])`
   * For the parametric search result, check `hi != len(L) and L[hi] == x`
 
 ## Optimization
-### Dynamic Programming
-#### Use Cases
-#### Example Code
-TODO
+### Dynamic Programming (TODO)
 
-### Divide and Conquer
-#### Use Cases
-#### Example Code
-TODO
+### Divide and Conquer (TODO)
 
-### Greedy
-#### Use Cases
-#### Example Code
-TODO
+### Greedy (TODO)
+* Well Ordering Principle
+  * Suppose Solution by Greedy as $O^*$
+  * Suppose $O^*$ is not an optimal, but $O^-$ is.
+  * Let
+    * $O^* = \{i_1, i_2, ..., i_{k-1}, i_k, i_{k+1}, ..., i_n\}$
+    * $O^- = \{i_1, i_2, ..., i_{k-1}, i^{'}_{k}, i^{'}_{k+1}, ..., i^{'}_{n}\}$
+  * Prove $O^+ = O^- - \{i^{'}_{k}\} + \{i_k\}$ is optimal, which is a contradiction. $\blacksquare$
 
-## Data Structure
-TODO
+## Data Structure (TODO)
+
+### Stack (TODO)
+* Shunting Yard
+  * Given infix arithmetic, convert into postfix.
+
+### Queue (TODO)
+
+### Heap (TODO)
+
+### Linked List (TODO)
+
+### Balanced Tree (TODO)
+
+### Segment Tree (TODO)
+
+### Bitmask (TODO)
+
+### String (TODO)
+
+## Graph (TODO)
+
+### Search - BFS & DFS
+```python
+# BFS & DFS - Python
+from collections import deque
+
+def xfs_traverse(graph, start):
+    to_visit, depth = deque([start]), {start: 0}
+
+    while to_visit: # still, there is node to visit...
+        v = to_visit.pop()  # .pop() for DFS, .popleft() for BFS
+        for w in graph[v]:
+            if w not in depth:
+                to_visit.append(w)
+                depth[w] = depth[v] + 1
+    
+    return depth
+```
+### Shortest Path
+There are four types of shortest path problems.
+1. **Single** start, **Single** end
+    * Subproblem of case #2
+2. **Single** start, **Every** end
+    * $\forall e \in G : w(e) \ge 0 :$ `Dijkstra`
+    * $\exists e \in G : w(e) < 0 :$ `Bellman-Ford`
+3. **Every** start, **Single** end
+    * Reduction of case #2
+4. **Every** start, **Every** end
+    * `Floyd-Warshall`
+
+#### Dijkstra (TODO)
+
+#### Bellman-Ford (TODO)
+
+#### Floyd-Warshall (TODO)
+
+### Min Spanning Tree (TODO)
+
+#### Prim (TODO)
+
+#### Kruskal (TODO)
+
+### Network Flow (TODO)
+
+#### Ford-Fulkerson (TODO)
+
+#### Bipartite Matching (TODO)
+
+## Geometry (TODO)
+
+## Numeric Analysis (TODO)
 
 <!--
 
-## 10장 탐욕법
-* Well Ordering Principle
-    * Suppose Solution by Greedy as $O^*$
-    * Suppose $O^*$ is not an optimal, but $O^-$ is.
-    * Let
-        * $O^* = \{i_1, i_2, ..., i_{k-1}, i_k, i_{k+1}, ..., i_n\}$
-        * $O^- = \{i_1, i_2, ..., i_{k-1}, i^{'}_{k}, i^{'}_{k+1}, ..., i^{'}_{n}\}$
-    * PROVE THAT $O^+ = O^- - \{i^{'}_{k}\} + \{i_k\}$ is optimal.
-
-## 11장 조합 탐색
-### 11.2 조합 탐색 기법들
-### 11.9 더 읽을거리
-
-## 12장 최적화 문제 결정 문제로 바꿔 풀기
+# 3부 알고리즘 설계 패러다임
+    ## 11장 조합 탐색
+    ## 12장 최적화 문제 결정 문제로 바꿔 풀기
 
 # 4부 유명한 알고리즘들
-
-## 13장 수치 해석
-### 13.1 도입
-### 13.2 이분법
-### 13.3 문제: 승률 올리기 (문제 ID: RATIO, 난이도: 하)
-### 13.4 풀이: 승률 올리기
-### 13.5 삼분 검색
-### 13.6 문제: 꽃가루 화석 (문제 ID: FOSSIL, 난이도: 상)
-### 13.7 풀이: 꽃가루 화석
-### 13.8 다른 주제들
-
-## 14장 정수론
-### 14.1 도입
-### 14.2 소수
-### 14.3 문제: 비밀번호 486 (문제 ID: PASS486, 난이도: 중)
-### 14.4 풀이: 비밀번호 486
-### 14.5 유클리드 알고리즘
-### 14.6 문제: 마법의 약 (문제 ID: POTION, 난이도: 중)
-### 14.7 풀이: 마법의 약
-### 14.8 모듈라 연산
-### 14.9 더 읽을거리(OPTIONAL)
-
-## 15장 계산 기하
-### 15.1 도입
-### 15.2 계산 기하의 도구들
-### 15.3 교차와 거리, 면적
-### 15.4 문제: 핀볼 시뮬레이션 (문제 ID: PINBALL, 난이도: 상)
-### 15.5 풀이: 핀볼 시뮬레이션
-### 15.6 다각형
-### 15.7 문제: 보물섬 (문제 ID: TREASURE, 난이도: 상)
-### 15.8 풀이: 보물섬
-### 15.9 문제: 너드인가, 너드가 아닌가? (문제 ID: NERDS, 난이도: 중)
-### 15.10 풀이: 너드인가, 너드가 아닌가?
-### 15.11 계산 기하 알고리즘 디자인 패턴
-### 15.12 자주 하는 실수와 유의점들
-### 15.13 더 읽을거리
+    ## 13장 수치 해석
+    ## 14장 정수론
+    ## 15장 계산 기하
 
 # 5부 기초 자료 구조
-
-## 16장 비트마스크
-### 16.1 도입
-### 16.2 비트마스크를 이용한 집합의 구현
-### 16.3 비트마스크의 응용 예제
-### 16.4 문제: 졸업 학기 (문제 ID: GRADUATION, 난이도: 중)
-### 16.5 풀이: 졸업 학기
-### 16.6 더 읽을거리
-
-## 17장 부분 합
-$$
-    S_n = \sum_{i=1}^{n}a_i
-$$
-
-## 18장 선형 자료 구조
-### 18.1 도입
-### 18.2 동적 배열
-### 18.3 연결 리스트
-### 18.4 동적 배열과 연결 리스트의 비교
-### 18.5 문제: 조세푸스 문제 (문제 ID: JOSEPHUS, 난이도: 하)
-### 18.6 풀이: 조세푸스 문제
-### 18.7 더 읽을 거리
-
-## 19장 큐와 스택, 데크
-```python
-# Python
-from collections import deque
-deque.popleft
-deque.pop
-deque.appendleft
-deque.append
-```
-
-## 20장 문자열
-### 20.1 도입
-### 20.2 문자열 검색
-### 20.3 문제: 재하의 금고 (문제 ID: JAEHASAFE, 난이도: 중)
-### 20.4 풀이: 재하의 금고
-### 20.5 접미사 배열
-### 20.6 문제: 말버릇 (문제 ID: HABIT, 난이도: 중)
-### 20.7 풀이: 말버릇
-### 20.8 더 읽을거리
+    ## 16장 비트마스크
+    ## 17장 부분 합
+    ## 18장 선형 자료 구조
+    ## 19장 큐와 스택, 데크
+    ## 20장 문자열
 
 # 6부 트리
-
-## 21장 트리의 구현과 순회
-### 21.1 도입
-### 21.2 트리의 순회
-### 21.3 문제: 트리 순회 순서 변경 (문제 ID: TRAVERSAL, 난이도: 하)
-### 21.4 풀이: 트리 순회 순서 변경
-### 21.5 문제: 요새 (문제 ID: FORTRESS, 난이도: 중)
-### 21.6 풀이: 요새
-
-## 22장 이진 검색 트리
-### 22.1 도입
-### 22.2 이진 검색 트리의 정의와 조작
-### 22.3 시간 복잡도 분석과 균형 잡힌 이진 검색 트리
-### 22.4 문제: 너드인가, 너드가 아닌가? 2 (문제 ID: NERD2, 난이도: 중)
-### 22.5 풀이: 너드인가, 너드가 아닌가? 2
-### 22.6 균형 잡힌 이진 검색 트리 직접 구현하기: 트립
-### 22.7 문제: 삽입 정렬 뒤집기 (문제 ID: INSERTION, 난이도: 중)
-### 22.8 풀이: 삽입 정렬 뒤집기
-
-## 23장 우선순위 큐와 힙
-### 23.1 도입
-### 23.2 힙의 정의와 구현
-### 23.3 문제: 변화하는 중간 값 (문제 ID: RUNNINGMEDIAN, 난이도: 하)
-### 23.4 풀이: 변화하는 중간 값
-
-## 24장 구간 트리
-### 24.1 구간 트리: 구간에 대한 질문 대답하기
-### 24.2 문제: 등산로 (문제 ID: MORDOR, 난이도: 중)
-### 24.3 풀이: 등산로
-### 24.4 문제: 족보 탐험 (문제 ID: FAMILYTREE, 난이도: 상)
-### 24.5 풀이: 족보 탐험
-### 24.6 펜윅 트리: 빠르고 간단한 구간 합
-### 24.7 문제: 삽입 정렬 시간 재기 (문제 ID: MEASURETIME, 난이도: 중)
-### 24.8 풀이: 삽입 정렬 시간 재기
-
-## 25장 상호 배타적 집합
-### 25.1 도입
-### 25.2 문제: 에디터 전쟁 (문제 ID: EDITORWARS, 난이도: 중)
-### 25.3 풀이: 에디터 전쟁
-
-## 26장 트라이
-### 26.1 도입
-### 26.2 문제: 안녕히, 그리고 물고기는 고마웠어요! (문제 ID: SOLONG, 난이도: 중)
-### 26.3 풀이: 안녕히, 그리고 물고기는 고마웠어요!
-### 26.4 트라이를 이용한 다중 문자열 검색
-### 26.5 문제: 보안종결자 (문제 ID: NH, 난이도: 상)
-### 26.6 풀이: 보안종결자
+    ## 21장 트리의 구현과 순회
+    ## 22장 이진 검색 트리
+    ## 23장 우선순위 큐와 힙
+    ## 24장 구간 트리
+    ## 25장 상호 배타적 집합
+    ## 26장 트라이
 
 # 7부 그래프
+    ## 27장 그래프의 표현과 정의
+        ## 28장 그래프의 깊이 우선 탐색
+        ## 29장 그래프의 너비 우선 탐색
+    ## 30장 최단 경로 알고리즘
+        ### 30.9 벨만-포드 알고리즘
+        ### 30.12 플로이드-워셜 알고리즘
+    ## 31장 최소 스패닝 트리
+        ### 31.2 크루스칼의 최소 스패닝 트리 알고리즘
+        ### 31.3 프림의 최소 스패닝 트리 알고리즘
+    ## 32장 네트워크 유량
+        ### 32.2 포드-풀커슨 알고리즘
+        ### 32.3 네트워크 모델링
+        ### 32.8 이분 매칭
 
-## 27장 그래프의 표현과 정의
-### 27.1 도입
-### 27.2 그래프의 사용 예
-### 27.3 암시적 그래프 구조들
-### 27.4 그래프의 표현 방법
-
-## 28장 그래프의 깊이 우선 탐색
-## 29장 그래프의 너비 우선 탐색
-```python
-# BFS, DFS (주의: 아래 코드는 Connected Graph에서만 작동)
-def get_distance(start):
-    to_visit, visited = \
-        [(0, start)], {start: 0}
-
-    while to_visit: # 여전히 노드가 남아 있다면...
-        dist, v = heapq.heappop(to_visit)
-        if dist > visited.get(v, float('inf')):
-            continue
-        for w, weight in edge(v):   # edge 함수로 구현하든, dict를 쓰든...
-            new_dist = visited[v] + weight
-            if w not in visited or new_dist < visited[w]:    # 방문한 적이 없거나 더 짧은 경로를 찾았다면
-                heapq.heappush(to_visit, (new_dist, w))
-                visited[w] = new_dist
-
-    return visited
-```
-
-## 30장 최단 경로 알고리즘
-최단경로 문제는 4가지로 나눌 수 있다.
-* **단일** 출발, **단일** 도착 `(p -> q)`
-    * 단일-전체의 하위문제
-* **단일** 출발, **전체** 도착 `(p -> B)`
-    * 음수 edge 부재 = 다익스트라
-    * 음수 edge 존재 = 벨만-포트
-* **전체** 출발, **단일** 도착 `(A -> q)`
-    * 그래프 방향을 반대로 뒤집으면 `단일출발 전체도착`과 동일한 경우이다.
-* **전체** 출발, **전체** 도착 `(A -> B)`
-
-### 30.2 다익스트라 알고리즘
-* **단일** 출발, **전체** 도착.
-* 음수 edge 존재 시 틀림
-* 암기: Dijkstra (D-efault)
-* 시작 노드 1개에 대해 $O(E\log{V})$
-
-```python
-import heapq
-
-def edge(v):
-    return [('distance_1', 'node_1'), ('distance_2', 'node_2')]
-
-def get_shortest(start):
-    to_visit, visited = [(0, start)], {start: 0}
-
-    while to_visit:
-        dist, v = heapq.heappop(to_visit)
-        
-        # "만료된 노드 삭제" - 아래 참고
-        if dist > visited[v]:
-            continue
-        assert dist == visited.get[v]
-
-        # 탐색 시작
-        for weight, w in edge(v):
-            new_dist = dist + weight
-            #  (미개척 노드거나)  or  (더 나은 개척로가 있거나)
-            if w not in visited or new_dist < visited[w]:
-                # heappush를 함으로써 기존 (old_dist, w)는 "만료된 노드 삭제"에서 걸러짐
-                # w not in visited 조건을 활용해, 더 좋은 해가 아닌 경우에는 heappush 안함
-                heapq.heappush(to_visit, (new_dist, w))
-                visited[w] = new_dist
-
-    return visited
-```
-
-### 30.9 벨만-포드 알고리즘
 * **단일** 출발, **전체** 도착 (= 다익스트라)
 * 음수 cycle 탐지 가능
 * 암기: Bellman-Ford (B-etter)
@@ -372,7 +275,6 @@ def get_shortest(node_count, edge, start):
     return dist
 ```
 
-### 30.12 플로이드-워셜 알고리즘
 * **전체** 출발, **전체** 도착
 * 음수 cycle 탐지 가능
 * 암기: Floyd-Warshall (F-ull)
@@ -394,25 +296,4 @@ def get_shortest(node_count, edge):
                 dist[start][end] = min(dist[start][end], dist[start][mid] + dist[mid][end])
     return dist
 ```
-
-## 31장 최소 스패닝 트리
-### 31.1 도입
-### 31.2 크루스칼의 최소 스패닝 트리 알고리즘
-### 31.3 프림의 최소 스패닝 트리 알고리즘
-
-## 32장 네트워크 유량
-### 32.1 도입
-### 32.2 포드-풀커슨 알고리즘
-### 32.3 네트워크 모델링
-### 32.4 문제: 승부 조작 (문제 ID: MATCHFIX, 난이도: 중)
-### 32.5 풀이: 승부 조작
-### 32.6 문제: 국책 사업 (문제 ID: PROJECTS, 난이도: 상)
-### 32.7 풀이: 국책 사업
-### 32.8 이분 매칭
-### 32.9 문제: 비숍 (문제 ID: BISHOPS, 난이도: 중)
-### 32.10 풀이: 비숍
-### 32.11 문제: 함정 설치 (문제 ID: TRAPCARD, 난이도: 상)
-### 32.12 풀이: 함정 설치
-### 32.13 더 공부할 거리
-
 -->
