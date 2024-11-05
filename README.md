@@ -1,5 +1,5 @@
 # solved-baekjoon
-This repository contains the problem I have solved in [BOJ Online Judge](https://acmicpc.net).
+This repository contains the problem I have solved in [BOJ Online Judge](https://acmicpc.net). My study record can be found at [here](./SUMMARY.md).
 
 ## Solutions
 Note that [solve/*filenumber*.{ext}]() is my corresponding solution for [https://www.acmicpc.net/problem/*filenumber*](). ({ext} = {py, cc, kt})

@@ -21,6 +21,7 @@
         "initializer_list": "cpp",
         "sstream": "cpp",
         "algorithm": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "bitset": "cpp"
     }
 }

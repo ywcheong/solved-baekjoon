@@ -1,11 +1,61 @@
-# Algorithm Study
+# Algorithm Study Summary Note
 Youngwoon Cheong (yw.ch@kaist.ac.kr)
 
-## 알고리즘 설계 패러다임
-## 6장 완전 탐색
-### 백트래킹
+## Time Complexity Analysis
+
+### Asymptotic Notation of Time Complexity
+* Upper-strict-bound $o(f(n))$
+* Upper-equal-bound $O(f(n))$
+* Equal-bound $\Theta(f(n))$
+* Lower-equal-bound $\Omega(f(n))$
+* Lower-strict-bound $\omega(f(n))$
+
+### Master Theorem
+Let $T(n)$ the time complexity function s.t.
+
+$$
+    T(n) = a T(n/b) + f(n)
+$$
+
+Then, naïvely,
+
+$$
+T(n) \in
+
+\begin{cases}
+\Theta(n^{\log_b a}) & : f(n) = o(n^{\log_b a}) \\
+\Theta(n^{\log_b a} \log n) & : f(n) = \Theta(n^{\log_b a}) \\
+\Theta(f(n)) & : f(n) = \omega(n^{\log_b a}) \\
+\end{cases}
+$$
+
+## Searching
+### Backtracking
+#### Use Cases
+* Small search space
+* Require traversing every cases
+
+#### Example Code
+```c++
+// Backtracking - C++
+void backtrack(State& state) {
+    if (is_solution(state)) {
+        do_something_with_solution(state);
+        return;
+    }
+
+    for (auto& choice : get_choices(state)) {
+        if (is_valid(state, choice)) {
+            state.add(choice);
+            backtrack(state);
+            state.remove(choice);
+        }
+    }
+}
+```
+
 ```python
-# Python
+# Backtracking - Python
 def backtrack(state) -> None:
     if is_solution(state):
         do_something_with_solution(state)
@@ -18,19 +68,56 @@ def backtrack(state) -> None:
             state.remove(choice)
 ```
 
-### 이분 탐색
+### Parametric Search
+#### Use Cases
+* Search space is sorted or total-ordered
+* Can implement `cond` function
+
+#### Example Code
+```python
+# Parametric Search - Python
+def parametric_search(lo, hi, cond):
+    assert not cond(lo) and cond(hi)    # X ... O
+    while lo + 1 < hi:                  # X  ?  O
+        mid = (lo + hi) // 2
+        if cond(mid):                   # X  O  O
+            hi = mid
+        else:                           # X  X  O
+            lo = mid
+    return lo, hi                       # X O
+
 ```
-lower_bound(L, k) = i
-cond(mid) = (k <= mid)
+* Note that you can use lo, hi as **out-of-bound**.
+  * For example, `L = [1, 2, 3]` and `cond = (x) => (4 <= x)`
+  * You can use `lo, hi = -1, len(L)` then you get `lo, hi = 2, 3`
 
-upper_bound(L, k) = i
-cond(mid) = (k < mid)
-```
+### Binary Search
+#### Use Cases
+* This is a special case of the [Parametric Search](#parametric-search).
+  * Given nondecreasing list `L`, you want to find `x`.
+  * Let `lo, hi = -1, len(L)`, `cond = (mid) => (x <= L[mid])`
+  * For the parametric search result, check `hi != len(L) and L[hi] == x`
 
-## 7장 분할 정복
+## Optimization
+### Dynamic Programming
+#### Use Cases
+#### Example Code
+TODO
 
-## 8장 동적 계획법
-* Memoization
+### Divide and Conquer
+#### Use Cases
+#### Example Code
+TODO
+
+### Greedy
+#### Use Cases
+#### Example Code
+TODO
+
+## Data Structure
+TODO
+
+<!--
 
 ## 10장 탐욕법
 * Well Ordering Principle
@@ -327,3 +414,5 @@ def get_shortest(node_count, edge):
 ### 32.11 문제: 함정 설치 (문제 ID: TRAPCARD, 난이도: 상)
 ### 32.12 풀이: 함정 설치
 ### 32.13 더 공부할 거리
+
+-->
