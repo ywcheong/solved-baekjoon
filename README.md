@@ -6,8 +6,8 @@ Note that [solve/*filenumber*.{ext}]() is my corresponding solution for [https:/
 
 ## Templates
 * Python - [template.py](/template/template.py)
-* C++17 - [template.py](/template/template.cc)
-* Kotlin - [template.py](/template/template.kt) (Not used)
+* C++17 - [template.cc](/template/template.cc)
+* Kotlin - [template.kt](/template/template.kt) (Not used)
 
 ## Docker Image
 You can replicate my problem solving environment using Docker. Check [ywcheong/solved-baekjoon-docker](https://github.com/ywcheong/solved-baekjoon-docker).

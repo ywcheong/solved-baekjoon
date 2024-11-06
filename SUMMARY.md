@@ -16,23 +16,24 @@ Youngwoon Cheong (yw.ch@kaist.ac.kr)
     - [Divide and Conquer (TODO)](#divide-and-conquer-todo)
     - [Greedy (TODO)](#greedy-todo)
   - [Data Structure (TODO)](#data-structure-todo)
-    - [Stack (TODO)](#stack-todo)
-    - [Queue (TODO)](#queue-todo)
-    - [Heap (TODO)](#heap-todo)
+    - [Stack](#stack)
+    - [Queue](#queue)
+    - [Heap](#heap)
     - [Linked List (TODO)](#linked-list-todo)
     - [Balanced Tree (TODO)](#balanced-tree-todo)
     - [Segment Tree (TODO)](#segment-tree-todo)
     - [Bitmask (TODO)](#bitmask-todo)
-    - [String (TODO)](#string-todo)
-  - [Graph (TODO)](#graph-todo)
+    - [Disjoint Set](#disjoint-set)
+  - [String (TODO)](#string-todo)
+  - [Graph](#graph)
     - [Search - BFS \& DFS](#search---bfs--dfs)
     - [Shortest Path](#shortest-path)
-      - [Dijkstra (TODO)](#dijkstra-todo)
+      - [Dijkstra](#dijkstra)
       - [Bellman-Ford (TODO)](#bellman-ford-todo)
       - [Floyd-Warshall (TODO)](#floyd-warshall-todo)
-    - [Min Spanning Tree (TODO)](#min-spanning-tree-todo)
+    - [Min Spanning Tree](#min-spanning-tree)
       - [Prim (TODO)](#prim-todo)
-      - [Kruskal (TODO)](#kruskal-todo)
+      - [Kruskal](#kruskal)
     - [Network Flow (TODO)](#network-flow-todo)
       - [Ford-Fulkerson (TODO)](#ford-fulkerson-todo)
       - [Bipartite Matching (TODO)](#bipartite-matching-todo)
@@ -60,7 +61,6 @@ Then, naïvely,
 
 $$
 T(n) \in
-
 \begin{cases}
 \Theta(n^{\log_b a}) & : f(n) \in o(n^{\log_b a}) \\
 \Theta(n^{\log_b a} \log n) & : f(n) \in \Theta(n^{\log_b a}) \\
@@ -128,18 +128,46 @@ def parametric_search(lo, hi, cond):
   * Suppose $O^*$ is not an optimal, but $O^-$ is.
   * Let
     * $O^* = \{i_1, i_2, ..., i_{k-1}, i_k, i_{k+1}, ..., i_n\}$
-    * $O^- = \{i_1, i_2, ..., i_{k-1}, i^{'}_{k}, i^{'}_{k+1}, ..., i^{'}_{n}\}$
-  * Prove $O^+ = O^- - \{i^{'}_{k}\} + \{i_k\}$ is optimal, which is a contradiction. $\blacksquare$
+    * $O^- = \{i_1, i_2, ..., i_{k-1}, i^{-}_{k}, i^{-}_{k+1}, ..., i^{-}_{n}\}$
+  * Prove $O^+ = O^- - \{i^{-}_{k}\} + \{i_k\}$ is optimal, which is a contradiction. $\blacksquare$
 
 ## Data Structure (TODO)
 
-### Stack (TODO)
-* Shunting Yard
-  * Given infix arithmetic, convert into postfix.
+### Stack
+* First In Last Out (FILO)
+* Time Complexity
+  * Insert, Pop, Top $O(1)$
+* Use Cases
+  * Shunting Yard
+    * Given infix arithmetic, convert into postfix.
+```python
+stack = list()
+```
 
-### Queue (TODO)
+### Queue
+* First In First Out (FIFO)
+* Time Complexity
+  * Same with stack
+* Use Cases
+```python
+from collections import deque
+queue = deque()
+```
 
-### Heap (TODO)
+### Heap
+* Smallest First Out
+* Time Complexity
+  * Top $O(1)$
+  * Insert, Pop $O(\log n)$
+* Use Cases
+  * Dijkstra
+```python
+import heapq
+my_heap = []
+heapq.heappush(my_heap, (weight, extra))
+assert my_heap[0] == (weight, extra)
+assert heapq.heappop(my_heap) == (weight, extra)
+```
 
 ### Linked List (TODO)
 
@@ -149,19 +177,49 @@ def parametric_search(lo, hi, cond):
 
 ### Bitmask (TODO)
 
-### String (TODO)
+### Disjoint Set
+* Split given set into partitions
+* Time Complexity
+  * Check partition of element $\approx O(1)$
+  * Union(merge) two partition of given two element $O(1)$
+* Usase
+  * Kruskal MST
 
-## Graph (TODO)
+```python
+# Disjoint Set - Python
+class DisjointSet:
+    '''Partition N elements'''
+    def __init__(self, n):
+        self.parent = [x for x in range(n)]
+    def get_parent(self, x):
+        if x != self.parent[x]:
+            self.parent[x] = get_root(self.parent[x])
+        return self.parent[x]
+    def unify_parent(x, y):
+        x, y = self.get_parent(x), self.get_parent(y)
+        if x != y:
+            self.parent[y] = x
+```
+
+## String (TODO)
+
+## Graph
+Graph $G = (V, E)$ while $E \subseteq V \times V$.
+
+In here we represent graph in the form of `graph = dict[v, List[w]]`.
 
 ### Search - BFS & DFS
 ```python
 # BFS & DFS - Python
 from collections import deque
 
-def xfs_traverse(graph, start):
+def xfs_traverse(
+    edge: dict[node, List[node]],
+    start: node
+):
     to_visit, depth = deque([start]), {start: 0}
 
-    while to_visit: # still, there is node to visit...
+    while to_visit: # still, there is a node to visit...
         v = to_visit.pop()  # .pop() for DFS, .popleft() for BFS
         for w in graph[v]:
             if w not in depth:
@@ -182,17 +240,94 @@ There are four types of shortest path problems.
 4. **Every** start, **Every** end
     * `Floyd-Warshall`
 
-#### Dijkstra (TODO)
+#### Dijkstra
+* **Single** start, **Every** end
+* Does **NOT** work when negative weight edge exists
+  * Use Bellman-ford instead in the case
+* Time Complexity $O(v \log e)$
+```python
+# Dijkstra - Python
+import heapq
+
+def shortest_dijkstra(
+    graph: dict[node, List[tuple[float, node]]],
+    start: node
+):
+    to_visit, visited = [(0, start)], {start: 0}
+
+    while to_visit:
+        dist, v = heapq.heappop(to_visit)
+
+        # Outdated v - remove
+        if visited[v] < dist:
+            continue
+
+        for weight, w in graph[v]:
+            new_dist = dist + weight
+            # (Not visited) or (Found better)
+            if (w not in visited) or (new_dist < dist[w]):
+                heapq.heappush(to_visit, (new_dist, w))
+                visited[w] = new_dist
+
+    return visited
+```
 
 #### Bellman-Ford (TODO)
 
 #### Floyd-Warshall (TODO)
 
-### Min Spanning Tree (TODO)
+### Min Spanning Tree
+$G^*$ is MST when given a weight function of edges $w: E \rightarrow \mathbb{R}^{+}$:
+
+$$
+G = (V, E^*) \text{ s.t. } E^* =
+\argmin_{\substack{E^* \subseteq E \\ |E^*|=|V|-1}}{
+    \sum_{e \in E^{*}}{w(e)}
+}
+$$
 
 #### Prim (TODO)
 
-#### Kruskal (TODO)
+#### Kruskal
+* Sort edges in the ascending order of weight
+* Take edges using greedy method, but not cycle-forming one
+* Time complexity: $O(e \log e)$
+  * Time complexity of Disjoint Set: $\approx O(1)$
+```python
+# Min Spanning Tree - Kruskal - Python
+def mst_kruskal(
+    node: List[node], 
+    edge: dict[node, List[node]],
+    weight: dict[tuple[node, node], float]
+):
+    '''Data Structure - Disjoint Set'''
+    parent = node[:]
+    def get_root(x):
+        if x != parent[x]:
+            parent[x] = get_root(parent[x])
+        return parent[x]
+    def unify_root(x, y):
+        x, y = get_root(x), get_root(y)
+        if x != y:
+            parent[y] = x
+
+    '''Kruskal Implement'''
+    edge = sorted(edge, key=lambda e: weight[e[0]][e[1]], reverse=True)
+    mst = []
+
+    # while MST not done...
+    while len(mst) < len(node) - 1:
+        # get minimum weight edge...
+        v, w = edge.pop()
+        
+        # check if it makes cycle...
+        if get_root(v) != get_root(w):
+            # if not, take it into MST
+            mst.append((v, w))
+            unify_root(v, w)
+    
+    return mst
+```
 
 ### Network Flow (TODO)
 
@@ -238,7 +373,6 @@ There are four types of shortest path problems.
         ### 30.9 벨만-포드 알고리즘
         ### 30.12 플로이드-워셜 알고리즘
     ## 31장 최소 스패닝 트리
-        ### 31.2 크루스칼의 최소 스패닝 트리 알고리즘
         ### 31.3 프림의 최소 스패닝 트리 알고리즘
     ## 32장 네트워크 유량
         ### 32.2 포드-풀커슨 알고리즘
