@@ -1,5 +1,5 @@
 services:
-    judge-env:
+    ps-env:
         build:
             context: ./
         volumes:

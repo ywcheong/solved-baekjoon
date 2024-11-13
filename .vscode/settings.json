@@ -23,5 +23,6 @@
         "algorithm": "cpp",
         "*.tcc": "cpp",
         "bitset": "cpp"
-    }
+    },
+    "github.copilot.editor.enableAutoCompletions": false
 }

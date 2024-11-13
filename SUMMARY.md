@@ -1,5 +1,5 @@
 # Python Algorithm Study Summary Note
-Youngwoon Cheong (yw.ch@kaist.ac.kr)
+Youngwoon Cheong (tencise@gmail.com)
 
 ## Table of Contents
 - [Python Algorithm Study Summary Note](#python-algorithm-study-summary-note)
