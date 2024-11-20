@@ -176,6 +176,34 @@ assert heapq.heappop(my_heap) == (weight, extra)
 ### Segment Tree (TODO)
 
 ### Bitmask (TODO)
+```python
+size = 10   # set size
+
+empty_bitset = 0
+full_bitset = (1 << size) - 1
+
+def add_element(bitset, element):
+    return bitset | (1 << element)
+
+def remove_element(bitset, element):
+    return bitset & ~(1 << element)
+
+def toggle_element(bitset, element):
+    return bitset ^ (1 << element)
+
+def is_contain(bitset, element):
+    return bool(bitset & (1 << element))
+
+def union(set_a, set_b):
+    return set_a | set_b
+    
+def intersection(set_a, set_b):
+    return set_a & set_b
+
+def iteration(size):
+    for y in range(2 ** size):
+        yield y
+```
 
 ### Disjoint Set
 * Split given set into partitions
