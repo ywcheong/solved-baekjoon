@@ -11,8 +11,21 @@ def input_list(given_type):
     return list(map(given_type, input_one(str).split()))
 
 
+def solve(a):
+    """write your logic here"""
+    return None
+
+
+def test():
+    """write your test here"""
+    assert 1 == 1
+
+
 def main():
-    """write your code here"""
+    """write your i/o here"""
+    a = input_one(int)
+    print(solve(a))
 
 
+test()
 main()
