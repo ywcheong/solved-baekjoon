@@ -17,8 +17,14 @@ def solve(a):
 
 
 def test():
+    def check(left, right):
+        if left == right:
+            print(f"Test pass")
+        else:
+            print(f"Test fail: {left} != {right}")
+
     """write your test here"""
-    assert 1 == 1
+    check(1 + 1, 2)
 
 
 def main():
