@@ -57,26 +57,32 @@ def solve(L1, L2):
 
     Amat = [[a, b], [c, d]]
     Vvec = [v, w]
-    # print(f"Amat={Amat} * pvec = Vvec{Vvec}")
+    #print(f"Amat={Amat} * pvec = Vvec{Vvec}")
 
     if det(Amat) != 0:
         p, q = matrix_times_vector(inverse_matrix(Amat), Vvec)
-        # print(f"Detzero p={p} q={q}")
+        #print(f"Detzero p={p} q={q}")
         return 0 <= p <= 1 and 0 <= q <= 1
+
+    if a == b == 0:
+        a, b, v, c, d, w = c, d, w, a, b, v
 
     if c != 0:
         a, b, v, w = a * c, b * c, v * c, -v * c + a * w
+        Amat = [[a, b], [c, d]]
+        Vvec = [v, w]
+        #print(f"re: Amat={Amat} * pvec = Vvec{Vvec}")
 
     if w != 0:
-        # print(f"Imps w={w}")
+        #print(f"Imps w={w}")
         return False
     
-    # print(f"Cvval (a={a})p + (b={b})q - (v={v}) ><= 0")
+    #print(f"Cvval (a={a})p + (b={b})q - (v={v}) ><= 0")
 
     checks = [a * p + b * q - v for p, q in [(0, 0), (0, 1), (1, 0), (1, 1)]]
     checks.sort()
 
-    # print(f"Dcheck checks={checks}")
+    #print(f"Dcheck checks={checks}")
     return checks[-1] * checks[0] <= 0
 
 
@@ -90,6 +96,8 @@ def test():
     print(solve([1, 1, 5, 5], [6, 6, 9, 9]) == bool(0))  # 7
     print(solve([1, 1, 5, 5], [5, 5, 1, 5]) == bool(1))  # 8
     print(solve([1, 1, 5, 5], [6, 6, 1, 5]) == bool(0))  # 9
+    print(solve([0, 0, 0, 1], [0, 2, 0, 3]) == bool(0))  # 10
+    print(solve([0, 0, 0, 1], [0, 1, 0, 3]) == bool(1))  # 10
 
 
 def main():
@@ -97,5 +105,4 @@ def main():
     print(int(solve(L1, L2)))
 
 
-# test()
 main()

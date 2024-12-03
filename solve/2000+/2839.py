@@ -13,15 +13,17 @@ def input_list(given_type):
 
 def main():
     """write your code here"""
-    raw = input_one(str)
-    explode = input_one(str)
-    converted = raw.replace(explode, "")
+    n = input_one(int)
 
-    while converted != raw:
-        converted, raw = converted.replace(explode, ""), converted
+    result = 0
+    while n % 5 != 0:
+        n -= 3
+        result += 1
 
-    if len(converted) == 0:
-        return "FRULA"
-    return converted
+    if n < 0:
+        return -1
+    else:
+        return result + (n // 5)
+
 
 print(main())

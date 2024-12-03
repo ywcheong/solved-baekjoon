@@ -1,0 +1,7 @@
+services:
+    ps-env:
+        build:
+            context: ./
+        volumes:
+            - ./:/ps-env/
+        command: tail -f /dev/null

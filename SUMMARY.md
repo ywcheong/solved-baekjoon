@@ -1,5 +1,5 @@
 # Python Algorithm Study Summary Note
-Youngwoon Cheong (yw.ch@kaist.ac.kr)
+Youngwoon Cheong (tencise@gmail.com)
 
 ## Table of Contents
 - [Python Algorithm Study Summary Note](#python-algorithm-study-summary-note)
@@ -12,17 +12,17 @@ Youngwoon Cheong (yw.ch@kaist.ac.kr)
     - [Parametric Search](#parametric-search)
     - [Binary Search](#binary-search)
   - [Optimization](#optimization)
-    - [Dynamic Programming (TODO)](#dynamic-programming-todo)
-    - [Divide and Conquer (TODO)](#divide-and-conquer-todo)
-    - [Greedy (TODO)](#greedy-todo)
-  - [Data Structure (TODO)](#data-structure-todo)
+    - [Dynamic Programming](#dynamic-programming)
+    - [Divide and Conquer](#divide-and-conquer)
+    - [Greedy](#greedy)
+  - [Data Structure](#data-structure)
     - [Stack](#stack)
     - [Queue](#queue)
     - [Heap](#heap)
     - [Linked List (TODO)](#linked-list-todo)
     - [Balanced Tree (TODO)](#balanced-tree-todo)
     - [Segment Tree (TODO)](#segment-tree-todo)
-    - [Bitmask (TODO)](#bitmask-todo)
+    - [Bitmask](#bitmask)
     - [Disjoint Set](#disjoint-set)
   - [String (TODO)](#string-todo)
   - [Graph](#graph)
@@ -118,11 +118,24 @@ def parametric_search(lo, hi, cond):
   * For the parametric search result, check `hi != len(L) and L[hi] == x`
 
 ## Optimization
-### Dynamic Programming (TODO)
+### Dynamic Programming
+```python
+memo = dict()
+def recursion(*arg):
+    assert *arg.__hash__
+    if arg in memo:
+        return memo[arg]
 
-### Divide and Conquer (TODO)
+    result = get_result(*arg)
 
-### Greedy (TODO)
+    memo[arg] = result
+    return result
+```
+
+### Divide and Conquer
+dq
+
+### Greedy
 * Well Ordering Principle
   * Suppose Solution by Greedy as $O^*$
   * Suppose $O^*$ is not an optimal, but $O^-$ is.
@@ -131,7 +144,7 @@ def parametric_search(lo, hi, cond):
     * $O^- = \{i_1, i_2, ..., i_{k-1}, i^{-}_{k}, i^{-}_{k+1}, ..., i^{-}_{n}\}$
   * Prove $O^+ = O^- - \{i^{-}_{k}\} + \{i_k\}$ is optimal, which is a contradiction. $\blacksquare$
 
-## Data Structure (TODO)
+## Data Structure
 
 ### Stack
 * First In Last Out (FILO)
@@ -175,7 +188,35 @@ assert heapq.heappop(my_heap) == (weight, extra)
 
 ### Segment Tree (TODO)
 
-### Bitmask (TODO)
+### Bitmask
+```python
+size = 10   # set size
+
+empty_bitset = 0
+full_bitset = (1 << size) - 1
+
+def add_element(bitset, element):
+    return bitset | (1 << element)
+
+def remove_element(bitset, element):
+    return bitset & ~(1 << element)
+
+def toggle_element(bitset, element):
+    return bitset ^ (1 << element)
+
+def is_contain(bitset, element):
+    return bool(bitset & (1 << element))
+
+def union(set_a, set_b):
+    return set_a | set_b
+    
+def intersection(set_a, set_b):
+    return set_a & set_b
+
+def iteration(size):
+    for y in range(2 ** size):
+        yield y
+```
 
 ### Disjoint Set
 * Split given set into partitions
