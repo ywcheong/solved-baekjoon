@@ -1,5 +1,6 @@
 out
 run-container
+Java/*
 
 *.exe
 solve-cc.out
